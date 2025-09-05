@@ -3,84 +3,166 @@
 <head>
   <meta charset="UTF-8">
   <title>Urso's Random Rabbit Holes</title>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body { font-family: sans-serif; max-width: 700px; margin: auto; padding: 20px; }
-    h1 { border-bottom: 1px solid #ccc; }
-    article { margin-bottom: 40px; }
+    body { 
+      font-family: 'Inter', sans-serif; 
+      max-width: 800px; 
+      margin: auto; 
+      padding: 20px; 
+      line-height: 1.6;
+      background: #fdfdfd;
+      color: #333;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    header h1 {
+      font-size: 2.2em;
+      margin-bottom: 0.2em;
+      color: #2c3e50;
+    }
+
+    nav {
+      margin-bottom: 40px;
+    }
+
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #0066cc;
+      font-weight: 600;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    article { 
+      margin-bottom: 60px; 
+    }
+
+    h2 {
+      margin-top: 1.2em;
+      color: #2c3e50;
+    }
+
+    h3 {
+      margin-top: 1em;
+      color: #34495e;
+    }
+
+    a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    ul {
+      margin-left: 20px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 60px;
+      padding-top: 20px;
+      border-top: 1px solid #ccc;
+      font-size: 0.9em;
+      color: #777;
+    }
   </style>
 </head>
 <body>
-  <h1>My Blog</h1>
+  <header>
+    <h1>Urso's Random Rabbit Holes</h1>
+    <p>Notes, projects, and thoughts while digging too deep 🕳️🐇</p>
+  </header>
 
-  <article>
+  <!-- Navigation -->
+  <nav>
+    <a href="#linux">Linux</a>
+    <a href="#quotes">Quotes</a>
+    <a href="#coding">Coding</a>
+    <a href="#korea">Korea</a>
+  </nav>
+
+  <article id="linux">
     <h2>Helpful Linux Things (I use Arch btw)</h2>
-
-    <p>Eversince I switched to Arch Linux I found myself digging through the web and asking how to basically do anything.
-    To either safe myself time or maybe a lost soul I figured I can write my experience down to have a quicker lookup later.
-    Also I wanted to upload my crazy high effort 100k hour rice that definetely wasn't me asking a Clanker to change the css files for me instead of figuring out how colors fit together</p>
-
-    <h3>1. Installation </h3>
     <p>
-    There are some things you should definetely do **before** installing.
-    Some obvious, some are things I wish I knew beforehand.
-    1. Save your data that you wanna keep (should be obvious)
-    2. Get a USB-Stick that you can reliably sacrifice to boot linux up
-    2.1 KEEP THIS USB-STICK CLOSE TO YOUR HEART IT WILL SAVE YOUR SWEET INNOCENT BUTT
-    3. Update your BIOS beforehand. I didn't, it was a painful process cause I needed to reinstall linux again
-    4. Make sure you can have an easy internet connection that has very easy login conditions
-    5. Maybe don't go full throttle on your main machine right away (whoops)
-    6. Get some coffee
-
-    At last: the Installation
-
-    I used this guide which was for the most part easy and painless except the times where I messed up because I cant copy stuff word for word apparently 100% user error
-    https://gist.github.com/mjkstra/96ce7a5689d753e7a6bdd92cdc169bae
-
-    I chose to go with Hyprland
-    
-    under **Option 2: Hyprland [WIP]** I switched out dolphin with nemo as I wasn't able to download dolphin.
+      Ever since I switched to Arch Linux I’ve been digging through the web asking how to basically do anything.
+      To either save myself time or maybe help a lost soul, I figured I’d write my experiences down for quicker lookup later.
+      Also, I wanted to upload my crazy high-effort 100k hour rice (that definitely wasn’t just me asking a clanker to change the CSS files).
     </p>
 
-    <h3>2. Rice </h3>
+    <h3>1. Installation</h3>
+    <ul>
+      <li>Save your data (obvious but important).</li>
+      <li>Get a USB stick you can dedicate to Linux.</li>
+      <li><strong>KEEP THIS USB-STICK CLOSE TO YOUR HEART — IT WILL SAVE YOU.</strong></li>
+      <li>Update your BIOS beforehand. I didn’t, and it forced me into a painful reinstall.</li>
+      <li>Make sure you have an easy, stable internet connection.</li>
+      <li>Maybe don’t go full throttle on your main machine right away (whoops).</li>
+      <li>Get some coffee ☕</li>
+    </ul>
     <p>
-      The ricing is fun as long as you have time / or commit a loooot of freetime to it. Luckily Reddit and Youtube provides a lot of examples and especially the 
-      help of a renowned clanker formatting css files has become easier than ever. Sure my rice is far from perfect but it works for me and I can do all the things I have to do.
-      For saftey reasons I have it backuped here: _TO DO ADD LINK_
+      For installation, I used this guide which was mostly painless except when I messed up due to copy-paste errors (100% user error):  
+      <a href="https://gist.github.com/mjkstra/96ce7a5689d753e7a6bdd92cdc169bae" target="_blank">Arch + Hyprland Guide</a>
+    </p>
+    <p>
+      I chose Hyprland. Under <em>Option 2: Hyprland [WIP]</em> I switched out Dolphin with Nemo since I wasn’t able to download Dolphin.
     </p>
 
-    <h3>3. Solutions to various problems</h3>
+    <h3>2. Rice</h3>
     <p>
-      1. Connecting to various WIFI setups
-      2. Changing fonts and setups
-      3. Seeing asian characters
-      4. Grub Menu says hi
-      4.1. Bailing out! You're on your own now. Good luck!
+      Ricing is fun if you have time (or dedicate way too much of it). Reddit and YouTube provide lots of inspiration,
+      and with help from a certain CSS-clanker, formatting became much easier. My rice is far from perfect but it works.
+      Backup link: <em>TODO: add link</em>
     </p>
-    </article>
 
-  <article>
-    <h2>Quotes / Thoughts</h2>
-    <p>Maybe I'll abuse parts of this website as a collection of thoughts and quotes - just like twitter but not driven by a maniac with too much money and too little condoms</p>
+    <h3>3. Random Fixes</h3>
+    <ul>
+      <li>Connecting to various Wi-Fi setups.</li>
+      <li>Changing fonts and setups.</li>
+      <li>Displaying Asian characters correctly.</li>
+      <li>Grub menu issues (sometimes you’re just on your own — good luck!).</li>
+    </ul>
   </article>
-  <article> 
-  <h2>
-    Coding Projects!
-Yubiiiii
-  </h2>
+
+  <article id="quotes">
+    <h2>Quotes & Thoughts</h2>
+    <p>
+      Maybe I’ll use this section as a collection of thoughts and quotes — like Twitter, but not run by a maniac with too much money.
+    </p>
   </article>
-  <article>
-    <h2>
-      South Korea Recommendations
-      <p>
-        Currently on exchange - I might as well write everything down so when people ask me I can provide more detailed infos
-      </p>
-      <p>
-        1. Food Recommendations
-        2. Places to see
-        3. Must know
-        4. Stuff
-      </p>
-    </h2>
+
+  <article id="coding">
+    <h2>Coding Projects</h2>
+    <p>Yubiiiii 🚀</p>
   </article>
+
+  <article id="korea">
+    <h2>South Korea Recommendations</h2>
+    <p>
+      Currently on exchange — I’ll write everything down so I can give better tips when people ask.
+    </p>
+    <ul>
+      <li>Food recommendations</li>
+      <li>Places to see</li>
+      <li>Must-know tips</li>
+      <li>Other stuff</li>
+    </ul>
+  </article>
+
+  <footer>
+    <p>Made with ❤️ by Urso | <a href="mailto:example@email.com">Contact</a></p>
+  </footer>
 </body>
 </html>
+
