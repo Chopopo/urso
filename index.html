@@ -2,18 +2,42 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark">
   <title>Urso's Random Rabbit Holes</title>
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg: #fdfdfd;
+      --fg: #333;
+      --muted: #777;
+      --border: #ccc;
+      --link: #0066cc;
+      --h2: #2c3e50;
+      --h3: #34495e;
+      --card: #ffffff;
+    }
+    body.dark {
+      --bg: #1e1e1e;
+      --fg: #ddd;
+      --muted: #aaa;
+      --border: #444;
+      --link: #4ea8ff;
+      --h2: #f5f5f5;
+      --h3: #e6e6e6;
+      --card: #2a2a2a;
+    }
+
+    * { box-sizing: border-box; }
     body { 
-      font-family: 'Inter', sans-serif; 
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif; 
       max-width: 800px; 
       margin: auto; 
       padding: 20px; 
       line-height: 1.6;
-      background: #fdfdfd;
-      color: #333;
+      background: var(--bg);
+      color: var(--fg);
       transition: background 0.3s, color 0.3s;
     }
 
@@ -25,92 +49,79 @@
     header h1 {
       font-size: 2.2em;
       margin-bottom: 0.2em;
-      color: #2c3e50;
+      color: var(--h2);
     }
 
-    nav {
-      margin-bottom: 40px;
-      text-align: center;
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
     }
 
     nav a {
-      margin: 0 10px;
+      margin: 0 8px;
       text-decoration: none;
-      color: #0066cc;
+      color: var(--link);
       font-weight: 600;
     }
-
-    nav a:hover {
-      text-decoration: underline;
-    }
+    nav a:hover { text-decoration: underline; }
 
     article { 
-      margin-bottom: 60px; 
+      margin-bottom: 60px;
+      background: var(--card);
+      padding: 8px 12px;
+      border-radius: 12px;
+      box-shadow: 0 1px 0 var(--border);
     }
 
     h2 {
       margin-top: 1.2em;
-      color: #2c3e50;
+      color: var(--h2);
     }
 
     h3 {
       margin-top: 1em;
-      color: #34495e;
+      color: var(--h3);
     }
 
     a {
-      color: #0066cc;
+      color: var(--link);
       text-decoration: none;
     }
+    a:hover { text-decoration: underline; }
 
-    a:hover {
-      text-decoration: underline;
-    }
-
-    ul {
-      margin-left: 20px;
-    }
+    ul { margin-left: 20px; }
 
     footer {
       text-align: center;
       margin-top: 60px;
       padding-top: 20px;
-      border-top: 1px solid #ccc;
-      font-size: 0.9em;
-      color: #777;
-    }
-
-    /* Dark mode styles */
-    body.dark {
-      background: #1e1e1e;
-      color: #ddd;
-    }
-
-    body.dark header h1,
-    body.dark h2,
-    body.dark h3 {
-      color: #f5f5f5;
-    }
-
-    body.dark a {
-      color: #4ea8ff;
+      border-top: 1px solid var(--border);
+      font-size: 0.92em;
+      color: var(--muted);
     }
 
     /* Toggle button */
     #darkToggle {
       cursor: pointer;
       padding: 6px 12px;
-      border: none;
-      border-radius: 8px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
       font-weight: 600;
-      background: #eee;
-      color: #333;
-      transition: background 0.3s, color 0.3s;
+      background: transparent;
+      color: var(--fg);
+      transition: background 0.3s, color 0.3s, border-color 0.3s;
+    }
+    #darkToggle:hover {
+      background: var(--card);
     }
 
-    body.dark #darkToggle {
-      background: #444;
-      color: #f5f5f5;
+    .meta {
+      font-size: 0.9em;
+      color: var(--muted);
     }
   </style>
 </head>
@@ -197,36 +208,72 @@
     </ul>
   </article>
 
-  <footer>
+   <footer>
     <p>Made with ❤️ by Urso | <a href="mailto:example@email.com">Contact</a></p>
-    <p id="visitorCount">👀 Visitors: ...</p>
+    <p id="visitorCount">👀 Visitors: —</p>
+    <noscript><p class="meta">Enable JavaScript to use dark mode and see the visitor count.</p></noscript>
   </footer>
 
   <script>
-    // Dark mode toggle
-    const toggle = document.getElementById("darkToggle");
-    const body = document.body;
+    // Run after DOM is ready (works even if this script is at the end)
+    document.addEventListener('DOMContentLoaded', () => {
+      const body = document.body;
+      const toggle = document.getElementById('darkToggle');
 
-    // Load preference
-    if (localStorage.getItem("theme") === "dark") {
-      body.classList.add("dark");
-    }
-
-    toggle.addEventListener("click", () => {
-      body.classList.toggle("dark");
-      if (body.classList.contains("dark")) {
-        localStorage.setItem("theme", "dark");
-      } else {
-        localStorage.setItem("theme", "light");
+      function applyTheme(theme) {
+        if (theme === 'dark') body.classList.add('dark');
+        else body.classList.remove('dark');
+        updateToggleLabel();
       }
-    });
 
-    // Visitor counter using countapi.xyz
-    fetch("https://api.countapi.xyz/hit/urso-blog/visits")
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById("visitorCount").innerText = "👀 Visitors: " + data.value;
+      function updateToggleLabel() {
+        const isDark = body.classList.contains('dark');
+        toggle.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+        toggle.setAttribute('aria-pressed', String(isDark));
+      }
+
+      // Load preference (fallback to system setting)
+      try {
+        const saved = localStorage.getItem('theme');
+        const systemPrefDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        applyTheme(saved || (systemPrefDark ? 'dark' : 'light'));
+      } catch (e) {
+        // localStorage may be disabled
+        applyTheme('light');
+      }
+
+      // Toggle handler
+      toggle?.addEventListener('click', () => {
+        const isDark = body.classList.toggle('dark');
+        updateToggleLabel();
+        try {
+          localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        } catch (e) { /* ignore */ }
       });
+
+      // Visitor counter with resilient fallback
+      (async function updateCounter() {
+        const el = document.getElementById('visitorCount');
+        const ns = (location.hostname || 'local').replace(/\./g, '-'); // namespace per host
+        const key = 'urso-blog-visits';
+        const url = `https://api.countapi.xyz/hit/${encodeURIComponent(ns)}/${encodeURIComponent(key)}`;
+        try {
+          const res = await fetch(url, { cache: 'no-store', mode: 'cors' });
+          const data = await res.json();
+          if (typeof data.value === 'number') {
+            el.textContent = `👀 Visitors: ${data.value}`;
+            try { localStorage.setItem('visitorCountBackup', String(data.value)); } catch (e) {}
+            return;
+          }
+          throw new Error('Unexpected response');
+        } catch (err) {
+          // Likely blocked by an ad/tracking blocker or offline — show cached value if we have one
+          let cached = null;
+          try { cached = localStorage.getItem('visitorCountBackup'); } catch (e) {}
+          el.textContent = cached ? `👀 Visitors: ${cached} (cached)` : '👀 Visitors: offline';
+        }
+      })();
+    });
   </script>
 </body>
 </html>
