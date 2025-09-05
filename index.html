@@ -128,16 +128,17 @@
 <body>
   <header>
     <h1>Urso's Random Rabbit Holes</h1>
-    <p>Notes, projects, and thoughts while digging too deep 🕳️🐇</p>
+    <p class="meta">Notes, projects, and thoughts while digging too deep 🕳️🐇</p>
+    <div class="topbar">
+      <nav>
+        <a href="#linux">Linux</a>
+        <a href="#quotes">Quotes</a>
+        <a href="#coding">Coding</a>
+        <a href="#korea">Korea</a>
+      </nav>
+      <button id="darkToggle" aria-label="Toggle color theme">🌙 Dark Mode</button>
+    </div>
   </header>
-
-  <!-- Navigation -->
-  <nav>
-    <a href="#linux">Linux</a>
-    <a href="#quotes">Quotes</a>
-    <a href="#coding">Coding</a>
-    <a href="#korea">Korea</a>
-  </nav>
 
   <article id="linux">
     <h2>Helpful Linux Things (I use Arch btw)</h2>
@@ -148,7 +149,6 @@
     </p>
 
     <h3>1. Installation</h3>
-    <p>Before you're heading into the wild world of Linux I highly recommend you to check out the following points beforehand. They could save you some time</p>
     <ul>
       <li>Save your data (obvious but important).</li>
       <li>Get a USB stick you can dedicate to Linux.</li>
@@ -160,26 +160,25 @@
     </ul>
     <p>
       For installation, I used this guide which was mostly painless except when I messed up due to copy-paste errors (100% user error):  
-      <a href="https://gist.github.com/mjkstra/96ce7a5689d753e7a6bdd92cdc169bae" target="_blank">Arch + Hyprland Installation Guide</a>
+      <a href="https://gist.github.com/mjkstra/96ce7a5689d753e7a6bdd92cdc169bae" target="_blank" rel="noopener">Arch + Hyprland Guide</a>
     </p>
     <p>
       I chose Hyprland. Under <em>Option 2: Hyprland [WIP]</em> I switched out Dolphin with Nemo since I wasn’t able to download Dolphin.
     </p>
 
-    <h3>2. Arch Rice</h3>
+    <h3>2. Rice</h3>
     <p>
       Ricing is fun if you have time (or dedicate way too much of it). Reddit and YouTube provide lots of inspiration,
       and with help from a certain CSS-clanker, formatting became much easier. My rice is far from perfect but it works.
       Backup link: <em>TODO: add link</em>
     </p>
 
-    <h3>3. Fixes for various Arch Linux issues</h3>
+    <h3>3. Random Fixes</h3>
     <ul>
       <li>Connecting to various Wi-Fi setups.</li>
       <li>Changing fonts and setups.</li>
       <li>Displaying Asian characters correctly.</li>
-      <li>Grub menu issues (Bailing out! You're on your own now. Good luck!).</li>
-      <li>Microphone / Mousepad / Brightness not working</li>
+      <li>Grub menu issues (sometimes you’re just on your own — good luck!).</li>
     </ul>
   </article>
 
@@ -208,7 +207,7 @@
     </ul>
   </article>
 
-   <footer>
+  <footer>
     <p>Made with ❤️ by Urso | <a href="mailto:example@email.com">Contact</a></p>
     <p id="visitorCount">👀 Visitors: —</p>
     <noscript><p class="meta">Enable JavaScript to use dark mode and see the visitor count.</p></noscript>
