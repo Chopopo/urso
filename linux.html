@@ -6,69 +6,79 @@
   <meta name="color-scheme" content="light dark">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <title>Urso's Random Rabbit Holes</title>
+  <title>My Linux Journey</title>
 </head>
 <body>
   <header>
-    <h1>Urso's Random Rabbit Holes</h1>
-    <p class="meta">Notes, projects, and thoughts while digging too deep 🕳️🐇</p>
+    <h1>Helpful Linux Things (I use Arch btw)</h1>
+    <p class="meta">This is mostly a lookup webpage for me but hopefully someone finds something helpful here</p>
     <div class="topbar">
       <nav>
-        <a href="#linux">Linux</a>
-        <a href="#quotes">Quotes</a>
-        <a href="#coding">Coding</a>
-        <a href="#korea">Korea</a>
-        <a href="#Rabbit Holes">Rabbit Holes</a>
-      </nav>
+        <a href="index.html">Main Site</a>
+        <a href="#install">Installation</a>
+        <a href="#rice">Linux Rice</a>
+        <a href="#howto">How-To's and Fixes</a>
+        </nav>
       <button id="darkToggle" aria-label="Toggle color theme">🌙 Dark Mode</button>
     </div>
   </header>
 
-  <article id="linux">
-    <h2><a href="linux.html" target="_self"> Everything about Linux (I use Arch btw) </a></h2>
+  <article id="install">
+    <h2>1. Installation</h2>
     <p>
       Ever since I switched to Arch Linux I’ve been digging through the web asking how to basically do anything.
       To either save myself time or maybe help a lost soul, I figured I’d write my experiences down for quicker lookup later.
       Also, I wanted to upload my crazy high-effort 100k hour rice (that definitely wasn’t just me asking a clanker to change the CSS files).
     </p>
-  </article>
-  
-  <article id="quotes">
-    <h2>Quotes & Thoughts</h2>
     <p>
-      Maybe I’ll use this section as a collection of thoughts and quotes — like Twitter, but not run by a maniac with too much money.
+      Currently I'm on a Acer Nitro V16 with an Nvidia RTX4050 and an AMD Ryzen 5
+    </p>
+    <h3>1.Pre-Installation</h3>
+    <ul>
+      <li>Save your data (obvious but important).</li>
+      <li>Get a USB stick you can dedicate to Linux.</li>
+      <li><strong>KEEP THIS USB-STICK CLOSE TO YOUR HEART — IT WILL SAVE YOU.</strong></li>
+      <li>Update your BIOS beforehand. I didn’t, and it forced me into a painful reinstall of Windows (oh the sweet irony).</li>
+      <li>Make sure you have an easy, stable internet connection.</li>
+      <li>Maybe don’t go full throttle on your main machine right away (whoops).</li>
+      <li>Get some coffee ☕</li>
+    </ul>
+
+    <h3>2. Installation</h3>
+    <p>
+      For installation, I used this guide which was mostly painless except when I messed up due to copy-paste errors (100% user error):  
+      <a href="https://gist.github.com/mjkstra/96ce7a5689d753e7a6bdd92cdc169bae" target="_blank" rel="noopener">Arch + Hyprland Guide</a>
+    </p>
+    <p>
+      I chose Hyprland. Under <em>Option 2: Hyprland [WIP]</em> I switched out Dolphin with Nemo since I wasn’t able to download Dolphin.
     </p>
   </article>
 
-  <article id="coding">
-    <h2>Coding Projects</h2>
-    <p>Yubiiiii 🚀</p>
-    <ul>
-      <li>Stressful Minesweeper</li>
-      <li>BookNote</li>
-    </ul>
-  </article>
-
-  <article id="korea">
-    <h2>South Korea Recommendations</h2>
+  <article id="rice">
+    <h2>2. Rice</h2>
     <p>
-      Currently on exchange — I’ll write everything down so I can give better tips when people ask.
+      Ricing is fun if you have time (or dedicate way too much of it). Reddit and YouTube provide lots of inspiration,
+      and with help from a certain CSS-clanker, formatting became much easier. My rice is far from perfect but it works.
+      Critiques of my rice can be nicely kept to the authors of such.
+      Backup link: <em>TODO: add link</em>
     </p>
-    <ul>
-      <li>Food recommendations</li>
-      <li>Places to see</li>
-      <li>Must-know tips</li>
-      <li>Other stuff</li>
-    </ul>
   </article>
-
-  <article id="Rabbit Holes">
-    <h2>Things that I maybe want to write about but do not have a good place</h2>
-    <p>Yubiiiii 🚀</p>
+  <article id="howto">
+    <h2>How-To's and Fixes</h2>
+    <ul>
+      <li>Connecting to various Wi-Fi setups.</li>
+      <li>Changing fonts and setups.</li>
+      <li>Displaying Asian characters correctly.</li>
+      <li>Grub menu issues (Bailing out, you are on your own. Good luck.)</li>
+      <li>Microphone / Trackpad / Brightness doesn't work</li>
+      <li>Screen Resolution is off</li>
+      <li>Pacman doesn't want to download stuff</li>
+      <li>Setting up Mullvad VPN on Arch</li>
+    </ul>
   </article>
 
   <footer>
-    <p>Iteratively made by Urso | <a href="mailto:example@email.com">Contact</a> <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
+    <p>Iteratively made by Urso | <a href="mailto:n8rvgzvom@mozmail.com">Contact</a> <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
   <script type='text/javascript'>kofiwidget2.init('Invite me to a coffee :)', '#0f44a1', 'S6S31KWWZP');kofiwidget2.draw();</script> </p>
     <noscript><p class="meta">Enable JavaScript to use dark mode and see the visitor count.</p></noscript>
   </footer>
