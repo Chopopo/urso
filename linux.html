@@ -64,37 +64,49 @@
     </p>
   </article>
   <article id="howto">
-    <h2>How-To's and Fixes</h2>
-    <ul>
-      <li>Connecting to various Wi-Fi setups.</li>
-      <li>Changing fonts and setups.</li>
-      <li>Displaying Asian characters correctly.</li>
-      <li>Grub menu issues (Bailing out, you are on your own. Good luck.)</li>
-      <li>Microphone / Trackpad / Brightness doesn't work</li>
-      <li>Screen Resolution is off</li>
-      <li>Pacman doesn't want to download stuff</li>
-      <li>Setting up Mullvad VPN on Arch</li>
-      <li>Pacman doesn't want to download / remove packages</li>
-      <li>Bluetooth doesn't start</li>      
-    </ul>
-  </article>
-  
-  <article>
-    <h2>Bluetooth doesn't start</h2>
-    <p>Managed to somehow deactivate my bluetooth driver after trying to get the laptop mode / energy saving mode running.
-      This somehow deactivated my bluetooth.
-      I tried:
-      <li>Restarting</li>
-      <li>Redownloading the package (which ultimately blessed me with another problem _insert link_</li>
-      <li>Classics to start with such as #codesnippet: #systemctl enable bluetooth.service #systemctl start bluetooth.service</li>
-      ultimately I saw the following that saved me:\n
-      #rfkill -> check if bluetooth is blocked or not and activate the necessary positions by
-      #rfkill unblock 3whatever number you need
+  <h2>3. How-To's and Fixes</h2>
+  <p>This section collects problems I ran into and how I fixed them. Click on one to jump straight to the solution.</p>
+  <ul>
+    <li><a href="#problem-wifi">Connecting to various Wi-Fi setups</a></li>
+    <li><a href="#problem-fonts">Changing fonts and setups</a></li>
+    <li><a href="#problem-characters">Displaying Asian characters correctly</a></li>
+    <li><a href="#problem-grub">Grub menu issues</a></li>
+    <li><a href="#problem-mic">Microphone / Trackpad / Brightness doesn’t work</a></li>
+    <li><a href="#problem-resolution">Screen resolution is off</a></li>
+    <li><a href="#problem-pacman-download">Pacman doesn’t want to download stuff</a></li>
+    <li><a href="#problem-vpn">Setting up Mullvad VPN on Arch</a></li>
+    <li><a href="#problem-pacman-remove">Pacman doesn’t want to remove packages</a></li>
+    <li><a href="#problem-bluetooth">Bluetooth doesn’t start</a></li>      
+  </ul>
+</article>
 
-      afterwards it was completely fine again
-    </p>
-  </article>
-  <footer>
+<article id="problem-bluetooth">
+  <h3>Bluetooth doesn’t start</h3>
+  <p class="context">
+    I somehow deactivated my bluetooth driver after fiddling with laptop mode / energy saving. Restarting didn’t help.
+  </p>
+  <ul class="attempts">
+    <li>Restarting → no effect</li>
+    <li>Reinstalling bluetooth package → broke other things</li>
+    <li>Classic commands:
+      <pre><code>systemctl enable bluetooth.service
+systemctl start bluetooth.service</code></pre>
+      → didn’t solve it
+    </li>
+  </ul>
+  <p class="solution">
+    The command that saved me:
+  </p>
+  <pre><code># check if bluetooth is blocked
+rfkill list
+
+# unblock the needed device
+rfkill unblock 3   # replace 3 with the correct number
+</code></pre>
+  <p class="result">After that, bluetooth was fine again ✅</p>
+</article>
+
+<footer>
     <p>Iteratively made by Urso | <a href="mailto:n8rvgzvom@mozmail.com">Contact</a> <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
   <script type='text/javascript'>kofiwidget2.init('Invite me to a coffee :)', '#0f44a1', 'S6S31KWWZP');kofiwidget2.draw();</script> </p>
     <noscript><p class="meta">Enable JavaScript to use dark mode and see the visitor count.</p></noscript>
