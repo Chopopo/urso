@@ -74,9 +74,26 @@
       <li>Screen Resolution is off</li>
       <li>Pacman doesn't want to download stuff</li>
       <li>Setting up Mullvad VPN on Arch</li>
+      <li>Pacman doesn't want to download / remove packages</li>
+      <li>Bluetooth doesn't start</li>      
     </ul>
   </article>
+  
+  <article>
+    <h2>Bluetooth doesn't start</h2>
+    <p>Managed to somehow deactivate my bluetooth driver after trying to get the laptop mode / energy saving mode running.
+      This somehow deactivated my bluetooth.
+      I tried:
+      <li>Restarting</li>
+      <li>Redownloading the package (which ultimately blessed me with another problem _insert link_</li>
+      <li>Classics to start with such as #codesnippet: #systemctl enable bluetooth.service #systemctl start bluetooth.service</li>
+      ultimately I saw the following that saved me:\n
+      #rfkill -> check if bluetooth is blocked or not and activate the necessary positions by
+      #rfkill unblock 3whatever number you need
 
+      afterwards it was completely fine again
+    </p>
+  </article>
   <footer>
     <p>Iteratively made by Urso | <a href="mailto:n8rvgzvom@mozmail.com">Contact</a> <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
   <script type='text/javascript'>kofiwidget2.init('Invite me to a coffee :)', '#0f44a1', 'S6S31KWWZP');kofiwidget2.draw();</script> </p>
