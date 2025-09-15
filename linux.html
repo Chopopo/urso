@@ -73,10 +73,11 @@
     <li><a href="#problem-grub">Grub menu issues</a></li>
     <li><a href="#problem-mic">Microphone / Trackpad / Brightness doesn’t work</a></li>
     <li><a href="#problem-resolution">Screen resolution is off</a></li>
-    <li><a href="#problem-pacman-download">Pacman doesn’t want to download stuff</a></li>
     <li><a href="#problem-vpn">Setting up Mullvad VPN on Arch</a></li>
-    <li><a href="#problem-pacman-remove">Pacman doesn’t want to remove packages</a></li>
-    <li><a href="#problem-bluetooth">Bluetooth doesn’t start</a></li>      
+    <li><a href="#problem-bluetooth">Bluetooth doesn’t start</a></li>
+    <li><a href="#problem-pacman-remove">Pacman doesn’t want to download / remove packages</a></li>
+    <li><a href="problem-buttonpress"> Which key is pressed</a></li>
+    <li><a href="problem-keymap_switch"> Change keyboard layout (in hyprland)</a></li>
   </ul>
 </article>
 
@@ -87,7 +88,7 @@
   </p>
   <ul class="attempts">
     <li>Restarting → no effect</li>
-    <li>Reinstalling bluetooth package → broke other things</li>
+    <li>Reinstalling bluetooth package → <a href="problem-pacman-download">broke pacman</a> </li>
     <li>Classic commands:
       <pre><code>systemctl enable bluetooth.service
 systemctl start bluetooth.service</code></pre>
@@ -103,8 +104,84 @@ rfkill list
 # unblock the needed device
 rfkill unblock 3   # replace 3 with the correct number
 </code></pre>
-  <p class="result">After that, bluetooth was fine again ✅</p>
+  <p class="result">After that, bluetooth was fine again (I assume it also works with the wifi if you're having troubles)</p>
 </article>
+
+<article id="problem-pacman-remove">
+  <h3>Pacman doesn’t want to remove packages</h3>
+  <p class="context">
+    While updating my system (because Discord released an update again) I broke various things (thank god for timeshift).
+    After restoring the snapshot before the upgrade pacman suddenly didn't want to do stuff anymore. Thankfully a <a href="https://www.reddit.com/r/archlinux/comments/nvrny2/comment/m5eny8r">helpful reddit comment</a> saved the day once again.
+    (Remember this here is but a collection of solutions that worked for me.)
+  </p>
+  <h3>Solution by <a href="https://www.reddit.com/user/SkyyySi/">/SkyyySi</a> on Reddit</h3>
+   <p>
+    Pacman will refuse to make any changes if the file
+    <code>/var/lib/pacman/db.lck</code> exists.
+  </p>
+
+  <h4>The root cause</h4>
+  <p>
+    The <code>db.lck</code> file tells <code>pacman</code> that another instance
+    is already running. This prevents two processes from modifying the system
+    package database at the same time (a race condition).
+  </p>
+  <p>
+    Normally the file is deleted when <code>pacman</code> finishes, but if
+    something goes wrong (crash, forced reboot, unexpected shutdown, or a buggy
+    graphical package manager), the lockfile can remain.
+  </p>
+
+  <h4>The solution</h4>
+  <p>
+    First, make sure <code>pacman</code> isn’t actually running. You can check
+    with:
+  </p>
+  <pre><code>sudo bash -c 'pgrep --full --euid=0 "pacman" | while read -r pid; do
+  cat "/proc/${pid}/cmdline" | awk '{ gsub(/\x00/, " "); print }'
+  echo
+done'</code></pre>
+
+  <p>
+    If no processes are listed, you can safely remove the lockfile:
+  </p>
+  <pre><code>sudo rm --force --verbose /var/lib/pacman/db.lck</code></pre>
+
+  <h4>Notes</h4>
+  <p>
+    If you frequently run into this issue, double-check your Arch installation
+    and any graphical package managers (GNOME Software, KDE Discover, etc.) that
+    might also be using <code>pacman</code>.
+  </p>
+</article>
+
+<article id="problem-buttonpress">
+  <h3>See which key is pressed</h3>
+  <p class="context">
+    I've seen a lot of different suggestions on the web and I am slightly confused why because there is one really simple solution:
+  </p>
+  <pre><code>sudo libinput debug-events</code></pre>
+</article>
+
+<article id="problem-keymap_switch">
+  <h3>Change keyboard layout (in hyprland)</h3>
+  <p class="context">
+    Anybody who's using a different keyboard than the standard English and might be bilingual where you have to use special characters will probably come across this problem.
+  </p>
+  <p>(What a niche - bilingual Arch User using Hyprland and needs special characters)
+  </p>
+  <p>Once again a <a href="https://www.reddit.com/r/hyprland/comments/xtxmv8/comment/k6km9hb">Reddit comment saved my day</a>
+  </p>
+  <h3>Solution by <a href="https://www.reddit.com/user/Rist88/">u/Rist88</a> on Reddit</h3>
+   <p>
+    If you want to change layouts by Super + Space, in your hyprland.conf use: 
+    <pre><code>input {
+    kb_layout=us,ua
+    kb_options=grp:win_space_toggle}</code></pre>
+    </p>
+    <p> Enable your specific layouts in kb_layout, next to "us", mine is "ua" </p>
+</article>
+
 
 <footer>
     <p>Iteratively made by Urso | <a href="mailto:n8rvgzvom@mozmail.com">Contact</a> <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>

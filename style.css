@@ -113,3 +113,20 @@
       font-size: 0.9em;
       color: var(--muted);
     }
+
+    pre, code {
+    font-family: monospace;
+    }
+
+    pre {
+      background: #f4f4f4;        /* light gray for light mode */
+      padding: 10px 14px;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 12px 0;
+      font-size: 0.95em;
+    }
+
+    body.dark pre {
+      background: #1a1818;        /* darker gray for dark mode */
+    }
