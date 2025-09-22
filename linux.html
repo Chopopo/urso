@@ -53,6 +53,7 @@
     <p>
       I chose Hyprland. Under <em>Option 2: Hyprland [WIP]</em> I switched out Dolphin with Nemo since I wasn’t able to download Dolphin.
     </p>
+    <p><strong>PLEASE REMEMBER</strong> how you initially mounted your disk. This will come in handy should you <a href="#problem-grub"> up in the future.</a></p>
   </article>
 
   <article id="rice">
@@ -69,8 +70,7 @@
   <p>This section collects problems I ran into and how I fixed them. Click on one to jump straight to the solution.</p>
   <ul>
     <li><a href="#problem-wifi">Connecting to various Wi-Fi setups</a></li>
-    <li><a href="#problem-fonts">Changing fonts and setups</a></li>
-    <li><a href="#problem-characters">Displaying Asian characters correctly</a></li>
+    <li><a href="#problem-fonts">All about fonts</a></li>
     <li><a href="#problem-grub">Grub menu issues</a></li>
     <li><a href="#problem-mic">Microphone / Trackpad / Brightness doesn’t work</a></li>
     <li><a href="#problem-resolution">Screen resolution is off</a></li>
@@ -81,6 +81,210 @@
     <li><a href="problem-keymap_switch"> Change keyboard layout (in hyprland)</a></li>
   </ul>
 </article>
+
+<article id="problem-wifi">
+  <h3>Connecting to Enterprise Wi-Fi Networks</h3>
+  <p class="context">
+    This setup should work for most WPA2-Enterprise or Eduroam-style networks.
+    Adjust the parameters (EAP method, authentication, etc.) depending on your institution’s configuration.
+  </p>
+
+  <h4>1. Create a new Wi-Fi connection</h4>
+  <pre><code>
+nmcli connection add type wifi con-name my-wifi \
+  ifname wlan0 ssid "MyEnterpriseWiFi"
+  </code></pre>
+
+  <h4>2. Configure authentication</h4>
+  <pre><code>
+nmcli connection modify my-wifi \
+  wifi-sec.key-mgmt wpa-eap \
+  802-1x.eap peap \
+  802-1x.identity "your_username" \
+  802-1x.password "your_password" \
+  802-1x.phase2-auth mschapv2
+  </code></pre>
+
+  <h4>3. Connect</h4>
+  <pre><code>
+nmcli connection up my-wifi
+  </code></pre>
+
+  <p>
+    If your network uses a different security type or EAP method, 
+    replace <code>wpa-eap</code>, <code>peap</code>, or <code>mschapv2</code> with the required options.
+  </p>
+</article>
+
+<article id="problem-fonts">
+  <h3>All About Fonts</h3>
+  <p class="context">
+    Not long after installing Arch, I moved abroad to South Korea. 
+    I quickly ran into the problem that my system only displayed the Latin alphabet, 
+    which made navigating Korean bureaucracy unnecessarily difficult.
+  </p>
+
+  <h4>1. Install Your Desired Fonts</h4>
+  <p>
+    There are many sites and repositories where you can browse and download fonts in different scripts and styles. 
+    Most of the time, they can be installed using your package manager (e.g. <code>pacman</code> or <code>yay</code>). 
+    If the site provides specific instructions, follow those instead.
+  </p>
+
+  <h4>2. Configure Fonts in Applications</h4>
+  <p>
+    Installing the font is only the first step. You usually also need to configure your environment to use it. 
+    Common places include:
+  </p>
+  <ul>
+    <li>Window manager or compositor (e.g. Hyprland)</li>
+    <li>Application launchers (e.g. Wofi)</li>
+    <li>Status bars (e.g. Waybar)</li>
+    <li>Your GTK or QT theme</li>
+  </ul>
+
+  <p>
+    Once properly configured, your system should display non-Latin scripts (like Korean, Japanese, or Chinese) correctly.
+  </p>
+</article>
+
+<article id="problem-grub">
+  <h3>GRUB Menu Issues</h3>
+  <h4><strong>Starring:</strong> ERROR: Failed to mount the real root device. Bailing out, you are on your own. Good luck.</h4>
+
+  <p class="context">
+    The first times I ran a full system update, I was kindly met by the GRUB boot menu. 
+    Confused at 1 or 2 am, with early morning obligations the next day, I stared at my screen and decided to postpone this to another day.
+  </p>
+
+  <p>
+    The next day I started googling (probably as you are right now) to try and find a viable solution. 
+    Under <a href="https://www.linuxfoundation.org/blog/blog/classic-sysadmin-how-to-rescue-a-non-booting-grub-2-on-linux" target="_blank" rel="noopener">this website</a> 
+    I found a pretty straightforward solution that seems to work for some people and does not require a USB stick with Arch (+ internet connection).
+    However, for some reason (likely user error), it did not work for me, so I had to do things the hard way.
+  </p>
+
+  <p>
+    This usually happens because the kernel might have changed drive assignments, you moved your hard drives, changed some partitions, 
+    or installed a new operating system and moved things around. In these scenarios your boot files are still there, 
+    but GRUB can’t find them. You can look for your boot files at the GRUB prompt, set their locations, and then boot your system and fix your GRUB configuration. 
+  </p>
+
+  <p>
+    As I mentioned in the <a href="install">install article</a>, you should always have a USB ready for moments like this.
+    <strong>ITS TIME HAS COME.</strong>
+  </p>
+
+  <p>
+    What worked for me was to boot up Arch via the USB (just like during the initial installation). 
+    Now is also the time to review how you originally installed your system. The following instructions are based on 
+    <a href="https://gist.github.com/mjkstra/96ce7a5689d753e7a6bdd92cdc169bae" target="_blank" rel="noopener">the installation guide</a> I used.
+  </p>
+
+  <h4>1. Mount Your Partitions</h4>
+  <pre><code>
+# Mount the root and home subvolume. 
+# If you don't want compression just remove the compress option.
+mount -o compress=zstd,subvol=@ /dev/nvme0n1p2 /mnt
+mkdir -p /mnt/home
+mount -o compress=zstd,subvol=@home /dev/nvme0n1p2 /mnt/home
+
+# Then also mount the EFI partition
+mkdir -p /mnt/efi
+mount /dev/nvme0n1p1 /mnt/efi
+  </code></pre>
+
+  <h4>2. Generate fstab and chroot</h4>
+  <pre><code>
+# Fetch the disk mounting points and generate fstab
+genfstab -U /mnt >> /mnt/etc/fstab
+
+# Verify fstab
+cat /mnt/etc/fstab
+
+# Chroot into the system
+arch-chroot /mnt
+  </code></pre>
+
+  <h4>3. Reinstall GRUB</h4>
+  <pre><code>
+grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB  
+grub-mkconfig -o /boot/grub/grub.cfg
+  </code></pre>
+
+  <h4>4. Unmount and Reboot</h4>
+  <pre><code>
+# Enable NetworkManager before rebooting (otherwise no internet)
+systemctl enable NetworkManager
+
+# Exit from chroot
+exit
+
+# Unmount everything (check if any drive is busy)
+umount -R /mnt
+
+# Reboot the system and unplug the installation media
+reboot
+  </code></pre>
+
+  <p>
+    This happened to me four or five times, and these steps always worked. 
+    I can’t really explain why, but eventually it seemed to stop recurring. 
+    However, I now run a Timeshift backup before every update, just in case. 
+    I’m not sure this is truly helping, but so far I haven’t run into new problems.
+  </p>
+
+</article>
+
+<article id="problem-mic">
+  <h3>Microphone / Trackpad / Brightness Doesn’t Work</h3>
+  <p class="context">
+    After a lot of trial, error, and checking drivers, the fix turned out to be embarrassingly simple:
+  </p>
+
+  <p class="solution">
+    Try toggling the device using the function keys (Fn + key combo) on your keyboard.  
+    Many laptops have shortcuts to enable/disable the microphone, trackpad, or adjust brightness.
+  </p>
+
+  <p>
+    It feels obvious in hindsight, but this simple check would have saved me a lot of time when I first ran into these issues.
+  </p>
+</article>
+
+<article id="problem-resolution">
+  <h3>Screen resoultion is off</h3>
+  <p class="context">
+    If you're coming from a fresh install it's very likely that you're resolution is off.
+  </p>
+
+  <p class="solution">
+    Depending on your graphical environment you have to go in its respective config file and adapt the resolution.
+    In my case I had to go into the hyprland config. (Remember this is for a laptop with one screen. For more detailed instructions please go to the actual wiki or RTFM)
+  </p>
+  <pre><code>
+    vim ~/.config/hypr/hyprland.conf
+  </code></pre>
+  <pre><code>
+    monitor=,YOUR_SCREEN_SIZE@YOUR_HERZ_RATE,0x0,1
+  </code></pre>
+</article>
+
+<article id="problem-vpn">
+  <h3>Setting up Mullvad VPN on Arch</h3>
+  <p class="context">
+    <a href="https://mullvad.net/en">Mullvad VPN</a> is a great private VPN where you can go as anonymous as it gets with your VPN. (I'm aware that in a lot of ways I am not anonymous in the web but VPN's have a lot of advantages and Mullvad doesn't collect my data)
+    However it was a little tricky to get it going with Arch.
+  </p>
+
+  <p class="solution">
+    Luckily I found out that you can set everything up with WireGuard following <a href="https://mullvad.net/en/help/wireguard-and-mullvad-vpn">this guide</a>.
+  </p>
+
+<p>I was debating about copy-pasting the article here but I figured I'll refrain from that. Seemed excessive and didn't add anything valuable.</p>
+
+</article>
+
 
 <article id="problem-bluetooth">
   <h3>Bluetooth doesn’t start</h3>
@@ -182,7 +386,6 @@ done'</code></pre>
     </p>
     <p> Enable your specific layouts in kb_layout, next to "us", mine is "ua" </p>
 </article>
-
 
 <footer>
     <p>Iteratively made by Urso | <a href="mailto:n8rvgzvom@mozmail.com">Contact</a> <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
