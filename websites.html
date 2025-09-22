@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>My Linux Journey</title>
+</head>
+<body>
+<header>
+  <h1>A Curated Collection of Websites</h1>
+  <p class="meta">Enjoy exploring!</p>
+  <div class="topbar">
+    <nav>
+      <a href="index.html"> Main Site</a>
+    </nav>
+    <button id="darkToggle" aria-label="Toggle color theme">🌙 Dark Mode</button>
+  </div>
+</header>
+
+<article>
+  <h2>Fun & Games</h2>
+  <ul>
+    <li><a href="https://bruno-simon.com/" target="_blank">Bruno Simon (3D Driving Portfolio)</a></li>
+    <li><a href="https://www.guessthecorrelation.com/" target="_blank">Guess the Correlation</a></li>
+    <li><a href="https://www.nytimes.com/games/connections" target="_blank">NYT Connections</a></li>
+    <li><a href="https://www.minutecryptic.com/" target="_blank">Minute Cryptic</a></li>
+    <li><a href="https://raould.github.io/pn0gstr0m/" target="_blank">Pn0gstr0m</a></li>
+    <li><a href="https://abagames.github.io/crisp-game-lib-11-games/?pakupaku" target="_blank">PakuPaku</a></li>
+    <li><a href="https://xkcd.com/" target="_blank">xkcd</a></li>
+    <li><a href="http://make-everything-ok.com/" target="_blank">Magic Button</a></li>
+    <li><a href="https://morsle.fun/" target="_blank">Morsle</a></li>
+    <li><a href="https://jellymar.io/" target="_blank">Jelly Mario</a></li>
+    <li><a href="https://bracket.city/" target="_blank">Bracket City</a></li>
+    <li><a href="https://www.dingusland.fun/" target="_blank">Dingusland</a></li>
+  </ul>
+</article>
+
+<article>
+  <h2>Random Tangents</h2>
+  <ul>
+    <li><a href="https://scispace.com/pdf/recombinant-sort-n-dimensional-cartesian-spaced-algorithm-33mywb24yn.pdf" target="_blank">
+      Recombinant Sort (Research Paper)</a></li>
+    <li><a href="https://economichardship.org/2024/08/tired-of-losing/" target="_blank">Tired of Losing — Economic Hardship Reporting Project</a></li>
+    <li><a href="https://sententiaeantiquae.com/" target="_blank">Sententiae Antiquae (Ancient Quotes & Commentary)</a></li>
+    <li><a href="https://www.halfbakery.com/" target="_blank">Half Bakery (Weird Ideas)</a></li>
+    <li><a href="https://kolibrios.org/en/" target="_blank">KolibriOS (Tiny Operating System)</a></li>
+    <li><a href="https://oeis.org/" target="_blank">OEIS — On-Line Encyclopedia of Integer Sequences</a></li>
+    <li><a href="https://libgen.li/" target="_blank">Library Genesis</a></li>
+    <li><a href="https://arxiv.org/abs/2002.01387" target="_blank">Randomized Numerical Linear Algebra: Foundations & Algorithms</a></li>
+    <li><a href=https://ciechanow.ski/ target="_blank">Bartosz Ciechanowski Blog (Highly recommended!!!)</a></li>
+  </ul>
+</article>
+
+<article>
+  <h2>Useful stuff</h2>
+  <ul>
+    <li><a href="https://www.creditcardvalidator.org/generator" target="_blank">Fake Credit Card Generator</a></li>
+    <li><a href="https://10minutemail.net/" target="_blank">10 Minute Mail</a></li>
+    <li><a href="https://fakepersongenerator.com/Index/generate" target="_blank">Fake Person Generator</a></li>
+    <li><a href="https://de.camelcamelcamel.com/" target="_blank">CamelCamelCamel (Amazon Price Tracker)</a></li>
+    <li><a href="https://rogerdudler.github.io/git-guide/" target="_blank">Git Guide (Cheat Sheet)</a></li>
+    <li><a href="https://web2.0rechner.de/" target="_blank">Online Calculator</a></li>
+  </ul>
+</article>
+
+<article>
+  <h2>Videos (mostly YouTube)</h2>
+  <li><a href="https://www.youtube.com/playlist?list=PLZLe7IkCph0KXjfz6v-HNisV591kDwlJW" target="_blank">Random Tangents - Video Version</a></li>
+  <li><a href="https://www.youtube.com/playlist?list=PLZLe7IkCph0Ir2G3LNGN5vm2pwNuTm1HB" target="_blank">Work of arts</a></li>
+  <li><a href="https://www.youtube.com/playlist?list=PLZLe7IkCph0JW8lZZF2v8DF3JFFNTZaq1" target="_blank">YouTube Gems</a></li>
+  <li><a href="https://www.youtube.com/playlist?list=PLZLe7IkCph0Iz8vQ0yobaoklicRX0rq6m" target="_blank">Music</a></li>
+  <li><a href="https://www.youtube.com/playlist?list=PLZLe7IkCph0JpG2Q8cknzLOLptLKhqw7M" target="_blank">Parkour</a></li>
+  <li><a href="https://thecommons.boston/" target="_blank">The Commons Parkour - Video platform for parkour videos</a></li>
+</article>
+
+  
+
+<footer>
+    <p>Iteratively made by Urso | <a href="mailto:n8rvgzvom@mozmail.com">Contact</a> <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
+  <script type='text/javascript'>kofiwidget2.init('Invite me to a coffee :)', '#0f44a1', 'S6S31KWWZP');kofiwidget2.draw();</script> </p>
+    <noscript><p class="meta">Enable JavaScript to use dark mode and see the visitor count.</p></noscript>
+  </footer>
+  
+  <script>
+    // Run after DOM is ready (works even if this script is at the end)
+    document.addEventListener('DOMContentLoaded', () => {
+      const body = document.body;
+      const toggle = document.getElementById('darkToggle');
+
+      function applyTheme(theme) {
+        if (theme === 'dark') body.classList.add('dark');
+        else body.classList.remove('dark');
+        updateToggleLabel();
+      }
+
+      function updateToggleLabel() {
+        const isDark = body.classList.contains('dark');
+        toggle.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+        toggle.setAttribute('aria-pressed', String(isDark));
+      }
+
+      // Load preference (fallback to system setting)
+      try {
+        const saved = localStorage.getItem('theme');
+        const systemPrefDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        applyTheme(saved || (systemPrefDark ? 'dark' : 'light'));
+      } catch (e) {
+        // localStorage may be disabled
+        applyTheme('light');
+      }
+
+      // Toggle handler
+      toggle?.addEventListener('click', () => {
+        const isDark = body.classList.toggle('dark');
+        updateToggleLabel();
+        try {
+          localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        } catch (e) { /* ignore */ }
+      });
+    });
+  </script>
+</body>
+</html>
